@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="Favicon/favicon-32x32.png" type="image/x-icon" />
 
 	<title>Interactive To-Do List</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -16,10 +15,11 @@
 		<p><em> Double click to mark an item off, click on "X" to delete an item, and drag items to reorder.</em></p>
        
 		<form name="toDoList">
-			<input type="text" name="ListItem" id="input"/>
+			<label for="input">Add Item</label>
+			<input name="ListItem" id="input"/>
 		</form>
     
-		<div onclick="newItem()" id="button">Add</div>
+		<div id="button">Add</div>
 		<br/>
 		<ol id="list"></ol>
   </div>
@@ -31,6 +31,6 @@
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
   integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
   crossorigin="anonymous"></script>
-  <script src="script.js"></script>
+  <script src="js/scripts.js"></script>
   </body>
 </html>
