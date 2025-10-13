@@ -12,7 +12,8 @@ width: 300px;
 margin: 0 auto;
 margin-top: 40px;
 background: white;
-border-radius: 5px;}
+border-radius: 5px;
+}
 
 form {
 display: inline-block;
@@ -58,4 +59,12 @@ li > crossOutButton {
 	float: right;
 	color: #025f70;
 	font-weight: 800;
+}
+
+.listButton-delete {
+	display: flex;
+	float: right;
+	background-color: red;
+	border-radius: 5px;
+	
 }
