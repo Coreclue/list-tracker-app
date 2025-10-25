@@ -24,12 +24,12 @@ $(document).ready(function () {
     let value = input.val();
     let listItem = $(`<li class="list-item">${value}</li>`);
     listItem.append('<button class="listButton-delete">X</button>');
-    
-    if(value.length < 2) {
-        alert('Enter at least two characters');
+
+    if (value.length < 2) {
+      alert("Enter at least two characters");
     } else {
-        list.append(listItem);
-        input.val('');  
+      list.append(listItem);
+      input.val("");
     }
 }
 // Add item to list when button is clicked
@@ -43,6 +43,22 @@ list.on('click', 'li', function() {
 });
 
 
+    myList.push(value);
+    // store list in local storage
+    localStorage.setItem("myList", JSON.stringify(myList));
+  }
+  // Add item to list when button is clicked
+  $("#button").click(function () {
+    newItem();
+  });
+  //Add a line through item when clicked
+  list.on("click", ".list-item", function () {
+    $(this).toggleClass("strike");
+  });
+  // Delete item on double click
+  list.on("dblclick", ".list-item", function () {
+    $(this).remove();
+  });
 
 
 
