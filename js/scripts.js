@@ -1,61 +1,38 @@
-// Wait until the DOM is fully loaded
-$(document).ready(function () {
-  // Initialize an empty array to hold list items
-  var myList = [];
-  // Retrieve stored list from local storage or initialize as empty array
-  const storedList = JSON.parse(localStorage.getItem("myList")) || [];
-  myList = storedList;
-  // Cache jQuery selectors for list and input elements
-  let list = $("#list");
-  let input = $("#input");
+function newItem() {
+  //javascript
+  //1. Adding a new item to the list of items:
+  let inputValue = $("#input").val();
+  let li = $(`<li>${inputValue}</li>`);
 
-  $.each(storedList, function (key, value) {
-    let listItem = $(`<li class="list-item">${value} ${value}</li>`);
-    const deleteButton = $('<button class="listButton-delete">X</button>');
-    listItem.attr("draggable", "true");
-    listItem.append(deleteButton);
-    list.append(listItem);
-  });
-
-  //working on each function.
-
-  // Function to add new item to list
-  function newItem() {
-    let value = input.val();
-    let listItem = $(`<li class="list-item">${value}</li>`);
-    listItem.append('<button class="listButton-delete">X</button>');
-
-    if (value.length < 2) {
-      alert("Enter at least two characters");
-    } else {
-      list.append(listItem);
-      input.val("");
-    }
-
-    myList.push(value);
-    // store list in local storage
-    localStorage.setItem("myList", JSON.stringify(myList));
+  if (inputValue === "") {
+    alert("You must write something!");
+  } else {
+    let list = $("#list");
+    list.append(li);
+    $("#input").val("");
   }
-  // Add item to list when button is clicked
-  $("#button").click(function () {
-    newItem();
-  });
-  //Add a line through item when clicked
-  list.on("click", ".list-item", function () {
-    $(this).toggleClass("strike");
-  });
-  // Delete item on double click
-  list.on("dblclick", ".list-item", function () {
-    $(this).remove();
-  });
 
-  //Remove item from storage when deleted. And leave storage when marked off
+  //2. Crossing out an item from the list of items:
+  function crossOut() {
+    li.toggleClass("strike");
+  }
 
-  //Now add a storage feature to save list items
+  li.on("dblclick", crossOut);
 
-  // Prevents form submission using enter key
-  $('form[name="toDoList"]').submit(function (e) {
-    e.preventDefault();
-    newItem();
-  });
+  //3(i). Adding the delete button "X":
+  let crossOutButton = $(`<crossoutbutton>X</crossoutbutton>`);
+  li.append(crossOutButton);
+
+  crossOutButton.on("click", deleteListItem);
+  //3(ii). Adding CLASS DELETE (DISPLAY: NONE) from the css:
+  function deleteListItem() {
+    li.addClass("delete");
+  }
+  // 4. Reordering the items:
+  $("#list").sortable();
+}
+// Prevents form submission using enter key
+$('form[name="toDoList"]').submit(function (e) {
+  e.preventDefault();
+  newItem();
 });
